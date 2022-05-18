@@ -1,34 +1,38 @@
-var users_passwords = new Map([["k", "k"]]), emailList = [""];
+var users_passwords = new Map([["k", "k"]]);
+var users_highScore = new Map([["k", 0]]);
 var emailList = [""];
+// signup_page.style.display = 'none';
+// login_page.style.display = 'none';
+// setting_page.style.display = 'none';
+// game_page.style.display = 'none';
 
 $(document).ready(function () {
-    $("#signup_page").hide();
-    $("#login_page").hide();
-    $("#setting_page").hide();
-    $("#game_page").hide();
-    $("#about_window").hide();
+    // hide all pages besides welcome 
+    // $("#signup_page").hide();
+    // $("#login_page").hide();
+    // $("#setting_page").hide();
+    // $("#game_page").hide();
 
 
-    //triggers in welcome page:
+    // triggers in welcome page:
     $("#WSignUpButton").click(welcomeToSignUp);
     $("#WLogInButton").click(welcomeToLogIn);
 
-    //triggers in SignUp page:
+    // triggers in SignUp page:
     $("#suSubmit").click(signUpToLogIn);
-    $("#suReset").click(signUpReset);
     $("#showHide").click(showHideFunc);
     $("#showHideConfirm").click(showHideFuncConfirm);
 
-    //triggers in logIn page:
+    // triggers in logIn page:
     $("#liSubmit").click(logInToSettings);
     $("#showHideLogin").click(showHideLoginFunc);
 
-    //triggers in settings:
+    // triggers in settings:
     $("#setStart").click(settingsStartGame);
     $("#setRandom").click(settingsRandom);
     $("#setReset").click(resetSettings);
 
-    //settings - set arrows:
+    // settings - set arrows:
     $("#UPKey").keydown(function (event) { setUpKey(this, event); });
     $("#DOWNKey").keydown(function (event) { setDOWNKey(this, event); });
     $("#RIGHTKey").keydown(function (event) { setRIGHTKey(this, event); });

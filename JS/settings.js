@@ -96,7 +96,7 @@ function settingsRandom() {
     rightArrow = 39;
     downArrow = 40;
     //start game:
-    setTimeout(goToGame, 1000);
+    setTimeout(goToGame, 200);
     return;
 }
 function goToGame() {
@@ -104,13 +104,6 @@ function goToGame() {
     if (startGameCon == true) {
         // Update Finale app setting 
         updateGamePage();
-        // gameTime = timeChosen;
-        // ballsNum = numOfBalls;
-        // monstersNum = numberOfMonsters;
-        // choseenMonster = monsters;
-        // color5Ball = ballColor5;
-        // colo15rBall = ballColor15;
-        // color25Ball = ballColor25;
         resetSettings();
         $("#setting_page").hide();
         $("#game_page").show();
@@ -129,10 +122,10 @@ function updateGamePage() {
     color15Ball = ballColor15;
     color25Ball = ballColor25;
     //buttons update from setting:
-	leftButtonCode = leftArrow;
-	upButtonCode = upArrow;
-	righttButtonCode = rightArrow;
-	downButtonCode = downArrow;
+    leftButtonCode = leftArrow;
+    upButtonCode = upArrow;
+    righttButtonCode = rightArrow;
+    downButtonCode = downArrow;
 
     $("#timeSet").attr("value", timeChosen);
     $("#Balls").attr("value", numOfBalls);
@@ -143,16 +136,14 @@ function updateGamePage() {
     $("#DOWNKeySet").attr("value", downArrowName);
     $("#RIGHTKeySet").attr("value", rightArrowName);
     $("#LEFTKeySet").attr("value", leftArrowName);
-    
+
     var counter = 1
     monstersImgs = new Map();
     for (let [key, value] of monsters.entries()) {
         if (value == true) {
-            monstersImgs.set(counter,document.getElementById(key));
+            monstersImgs.set(counter, document.getElementById(key));
             var imgSrc = $("#" + key).attr("src");
-
             $("#monster" + counter).attr("src", imgSrc);
-            // $("#monster" + counter).attr("display", "block");
             document.getElementById("monster" + counter).style.display = "block";
             counter++;
         }

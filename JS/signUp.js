@@ -1,13 +1,12 @@
 function signUpToLogIn() {
-    //validion    
+    // validion    
     var userName = $("#lbUsernameInput").val();
     var password = $("#lbPasswordInput").val();
     var rePassword = $("#lbPasswordConInput").val();
     var fullName = $("#lbFullNameInput").val();
     var email = $("#lbEmailInput").val();
-    var bDate = $("#lbDateOfBirthInput").val();
 
-    //password:
+    // password:
     if (password.search(/\d/) == -1) {
         alert("Password must contains numbers");
         return;
@@ -20,7 +19,7 @@ function signUpToLogIn() {
         alert("Password must contains letters");
         return;
     }
-    //name:
+    // name:
     if (fullName.search(/\d/) == 1) {
         alert("full name should contain only letters");
         return;
@@ -33,35 +32,28 @@ function signUpToLogIn() {
         alert("UserName already in use , please choose another one.");
         return;
     }
-    //email
+    // email
     if (emailList.includes(email)) {
         alert("Email adress already in use , please choose another one.");
         return;
     }
 
-    //add to dictionary
+    // add to dictionary
     users_passwords.set(userName, password);
-
+    users_highScore.set(userName, 0);
     // push to end of array
     emailList.push(email);
     // clear cells for next time
-    console.log("dict After:" + users_passwords.size);
+    console.log("users_passwords dict After:" + users_passwords.size);
+    console.log("users_highScore dict After:" + users_highScore.size);
     console.log("emails After:" + emailList);
 
     alert("Welcome to the Cookie-Man game. please Login to your new account");
-    //add to list
+    // add to list
 
     $("#signup_page").hide();
     $("#login_page").show();
-    document.getElementById('signup_form').reset()
-    // return;
-
 }
-
-function signUpReset() {
-    //reset all cells
-}
-
 
 
 function showHideFunc() {

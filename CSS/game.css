@@ -33,6 +33,24 @@
     height: 100%;
 } */
 
+#game_setting {
+    display: flex;
+    flex-direction: column;
+}
+
+.gameSettingDisplay {
+    /* width: 100%; */
+    display: flex;
+    flex-direction: column;
+}
+
+
+.generalSettingContainer,
+.ballColorContainer,
+.keysContainer {
+    display: inline-flex;
+    justify-content: space-between;
+}
 
 #game_page h3,
 h4 {
@@ -43,10 +61,11 @@ h4 {
 #game_page input {
     background-color: #93dfff;
     border: 0;
-    width: 80px;
+    width: 85px;
     cursor: context-menu;
-    padding: 0px 0px !important;
-    margin: 0px 0px !important;
+    padding: 0px 0px;
+    margin: 0px 0px;
+    color: #036e9d;
 }
 
 #game_page input:focus {
@@ -57,16 +76,33 @@ h4 {
     width: 40px !important;
     height: 40px;
     display: none;
-
 }
-
-
 
 .MonsterContainer {
     display: inline-flex;
 }
 
-/* .MonsterContainer input {
-    width: 25%;
+#game_page label {
+    font-weight: bold;
+}
 
-} */
+#game_status label,
+input {
+    font-size: large;
+}
+
+#game_setting label,
+input {
+    font-size: medium;
+}
+
+.generalSettingContainer input {
+    width: 50px !important;
+    text-align: center;
+}
+
+.ballColorContainer input {
+    width: 50px !important;
+    height: 20px !important;
+    margin-bottom: 1px !important;
+}

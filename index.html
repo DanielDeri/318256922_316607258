@@ -53,7 +53,7 @@
 		</div>
 
 		<!--Sign Up Page-->
-		<div id="signup_page" class="content_page">
+		<div id="signup_page" class="content_page" style="display: none;">
 			<h1>Sign Up To The Cookie-Man Game</h1>
 			<form id="signup_form" onsubmit="return false">
 				<h3>Please fill in this form to create an account:</h3>
@@ -98,7 +98,7 @@
 		</div>
 
 		<!--Login Page-->
-		<div id="login_page" class="content_page">
+		<div id="login_page" class="content_page" style="display: none;">
 			<h1>Log In To The Cookie-Man Game</h1>
 			<h3>Please fill in this Deatails to Log In To Your account:</h3>
 			<form id="login_form" onsubmit="return false">
@@ -121,7 +121,7 @@
 		</div>
 
 		<!--Setting Page-->
-		<div id="setting_page" class="content_page">
+		<div id="setting_page" class="content_page" style="display: none;">
 			<h1>Game Setting</h1>
 
 			<form id="setting_form" onsubmit="return false">
@@ -185,16 +185,16 @@
 		</div>
 
 		<!--Game Page-->
-		<div id="game_page">
+		<div id="game_page" style="display: none;">
 			<!--Game Status Section - Left Side-->
 			<div id="game_status">
 				<h3>Game Status</h3>
 				<div id="username">
-					<label for="lbUsername">User Name:</label>
+					<label for="lbUsername">USERNAME:</label>
 					<input id="lbUsername" type="text" readonly="readonly">
 				</div>
 				<div id="highScore">
-					<label for="lbHighScore">High Score:</label>
+					<label for="lbHighScore">HIGH SCORE:</label>
 					<input id="lbHighScore" type="text" readonly="readonly">
 				</div>
 				<div id="score">
@@ -202,7 +202,7 @@
 					<input id="lblScore" type="text" readonly="readonly">
 				</div>
 				<div id="lifes">
-					<label for="lblLifesLeft">Lifes Left:</label>
+					<label for="lblLifesLeft">LIFES:</label>
 					<div id="lifesLeftDiv">
 						<img id="life1" src="./Media/Images/BonusLife.png">
 						<img id="life2" src="./Media/Images/BonusLife.png">
@@ -224,18 +224,17 @@
 			<!--Game Setting Section - Right Side-->
 			<div id="game_setting">
 				<h3>Game Setting</h3>
-				<!-- <form id="setting_form" onsubmit="return false"> -->
 				<h4>General Game Setting:</h4>
-
-				<div class="generalSettingContainer">
-					<label for="timeSet">Game Time:</label>
-					<input id="timeSet" type="text" readonly="readonly">
+				<div class="gameSettingDisplay">
+					<div class="generalSettingContainer">
+						<label for="timeSet">Game Time:</label>
+						<input id="timeSet" type="text" readonly="readonly">
+					</div>
+					<div class="generalSettingContainer">
+						<label for="Balls">Number of Balls:</label>
+						<input id="Balls" type="text" readonly="readonly">
+					</div>
 				</div>
-				<div class="generalSettingContainer">
-					<label for="Balls">Number of Balls:</label>
-					<input id="Balls" type="text" readonly="readonly">
-				</div>
-
 				<h4>Your Pursuers:</h4>
 				<div class="MonsterContainer">
 					<input type="image" id="monster1" class="Monster" readonly="readonly">
@@ -245,38 +244,41 @@
 				</div>
 
 				<h4>Game Balls Color:</h4>
-				<div class="ballColorContainer">
-					<label for="5BallColor">5 Points Ball:</label>
-					<input id="5BallColor" class="ballColor" type="text" readonly="readonly">
+				<div class="gameSettingDisplay">
+					<div class="ballColorContainer">
+						<label for="5BallColor">5 Points Ball:</label>
+						<input id="5BallColor" class="ballColor" type="text" readonly="readonly">
+					</div>
+					<div class="ballColorContainer">
+						<label for="15BallColor">15 Points Ball:</label>
+						<input id="15BallColor" class="ballColor" type="text" readonly="readonly">
+					</div>
+					<div class="ballColorContainer">
+						<label for="25BallColor">25 Points Ball:</label>
+						<input id="25BallColor" class="ballColor" type="text" readonly="readonly">
+					</div>
 				</div>
-				<div class="ballColorContainer">
-					<label for="15BallColor">15 Points Ball:</label>
-					<input id="15BallColor" class="ballColor" type="text" readonly="readonly">
-				</div>
-				<div class="ballColorContainer">
-					<label for="25BallColor">25 Points Ball:</label>
-					<input id="25BallColor" class="ballColor" type="text" readonly="readonly">
-				</div>
-
 
 				<h4>Game Movement Keys:</h4>
-				<div class="keysContainer">
-					<label for="UPKeySet">UP key:</label>
-					<input id="UPKeySet" type="text" readonly="readonly">
+				<div class="gameSettingDisplay">
+					<div class="keysContainer">
+						<label for="UPKeySet">UP key:</label>
+						<input id="UPKeySet" type="text" readonly="readonly">
+					</div>
+					<div class="keysContainer">
+						<label for="DOWNKeySet">DOWN Key:</label>
+						<input id="DOWNKeySet" type="text" readonly="readonly">
+					</div>
+					<div class="keysContainer">
+						<label for="RIGHTKeySet">RIGHT Key:</label>
+						<input id="RIGHTKeySet" type="text" readonly="readonly">
+					</div>
+					<div class="keysContainer">
+						<label for="LEFTKeySet">LEFT Key:</label>
+						<input id="LEFTKeySet" type="text" readonly="readonly">
+					</div>
 				</div>
-				<div class="keysContainer">
-					<label for="DOWNKeySet">DOWN Key:</label>
-					<input id="DOWNKeySet" type="text" readonly="readonly">
-				</div>
-				<div class="keysContainer">
-					<label for="RIGHTKeySet">RIGHT Key:</label>
-					<input id="RIGHTKeySet" type="text" readonly="readonly">
-				</div>
-				<div class="keysContainer">
-					<label for="LEFTKeySet">LEFT Key:</label>
-					<input id="LEFTKeySet" type="text" readonly="readonly">
-				</div>
-				<!-- </form> -->
+
 			</div>
 		</div>
 
@@ -300,7 +302,7 @@
 						If you want to be a winner and not a sore loser you need to help the Cookie-Man escape from
 						his friends, eat cookies and gain at least 100 points before the time stop.
 						<br>
-						<center>Good Lock!</center>
+						<center>Good Luck!</center>
 					</p>
 				</div>
 				<div class="modal-ans">

@@ -1,8 +1,5 @@
 function showWelcome() {
-    if (document.getElementById("welcome_page").style.display != "none") {
-
-    }
-    else {
+    if (document.getElementById("welcome_page").style.display == "none") {
         $(signup_page).hide();
         $(login_page).hide();
         $(setting_page).hide();
@@ -14,31 +11,30 @@ function showWelcome() {
 }
 
 function showSignup() {
-    if (document.getElementById("signup_page").style.display != "none") {
-
-    }
-    else {
+    if (document.getElementById("signup_page").style.display == "none") {
         $(welcome_page).hide();
         $(login_page).hide();
         $(setting_page).hide();
         $(game_page).hide();
+        signup_form.reset();
         $(signup_page).show();
+        // resetForms();
         // stopGame();
     }
 }
 function showLogin() {
-    if (document.getElementById("login_page").style.display != "none") {
-
-    }
-    else {
+    if (document.getElementById("login_page").style.display == "none") {
         $(welcome_page).hide();
         $(signup_page).hide();
         $(setting_page).hide();
         $(game_page).hide();
+        login_form.reset();
         $(login_page).show();
         // stopGame();
     }
 }
+
+
 
 function showAbout() {
     document.getElementById("about_window").style.display = 'block';
