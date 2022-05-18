@@ -2,7 +2,6 @@ var context;
 var shape = new Object();
 var board;
 var score;
-var pacColor;
 var startTime;
 var timeElapsed;
 var interval;
@@ -63,6 +62,9 @@ var cookieLifeImg;
 var lifeGameRemain;
 //CookieMan:
 var pacmanImg;
+var pacmanDownImg;
+var pacmanLeftImg;
+var pacmanUpImg;
 var pacmanRemain;
 //buttons:
 var leftButtonCode;
@@ -81,7 +83,6 @@ function Start() {
 	context = canvas.getContext("2d");
 	board = new Array();
 	score = 0;
-	pacColor = "yellow";
 	var cnt = 100;
 	//to change: ballsNum,monstersNum,
 	// settngs:
@@ -95,15 +96,20 @@ function Start() {
 	// var ball15_remain = Math.floor(balls_remain * 0.3);
 	// var ball25_remain = Math.floor(balls_remain * 0.6);
 	ballsRemain = ballsNum;
+	cookieLifeEaten = false;
 	pacmanRemain = 1;
 	bonusCoockieRemain = 1;
 	surpriseRemain = 2;
 	cookieLifeRemain = 1;
+	lifeGameRemain = 5;
 	ball25Remain = Math.floor(ballsRemain * 0.6);
 	ball15Remain = Math.floor(ballsRemain * 0.3);
 	ball5Remain = Math.floor(ballsRemain * 0.1);
 	//add images:
 	pacmanImg = document.getElementById("CookieMan");
+	pacmanUpImg = document.getElementById("CookieManUp");
+	pacmanDownImg = document.getElementById("CookieManDown");
+	pacmanLeftImg = document.getElementById("CookieManLeft");
 	bonusCoockieImg = document.getElementById("BonusCookie");
 	surpriseImg = document.getElementById("Surprise");
 	cookieLifeImg = document.getElementById("BonusLife");
@@ -111,7 +117,8 @@ function Start() {
 	startTime = new Date();
 	monstersNum = 2;
 	var monsters_remain = monstersNum;
-	higestScore = 50*bonusCoockieRemain + 70*surpriseRemain + 25*ball25Remain + 15*ball15Remain + 5*ball5Remain ;
+	
+	higestScore = 0;
 	// var monsters_set_idInInx_bool = monsters;
 	sizeOfBoard = 12;
 	halfOfBoard = sizeOfBoard/2;
@@ -121,7 +128,6 @@ function Start() {
 	canvasCell = canvasWidth/sizeOfBoard;//50
 	canvasCellCenterOffset = canvasCell/2
 	canvasCellRadius = canvasCell/2;
-	firstTime = true;	
 
 	let randomNum_0_to_7_1 = Math.floor(Math.random() * 8);
 	let randomNum_0_to_7_2 = Math.floor(Math.random() * 8);
@@ -157,16 +163,16 @@ function Start() {
 				(i == 5 && j == (sizeOfBoard-2)) ||
 				(i == 7 && j == (sizeOfBoard-2))) 
 				{
-				board[i][j] = 4;//walls
+				board[i][j] = "wall";//4
 				}
 				// monsters:
-			else if((i == 0 && j == 0)||
-				(i == 0 && j == (sizeOfBoard-1))||
-				(i == (sizeOfBoard-1) && j == 0)||
-				(i == (sizeOfBoard-1) && j == (sizeOfBoard-1))){
-				board[i][j] = "color25Ball" //1
-				// board[i][j] = "monsterHere";
-				}
+			// else if((i == 0 && j == 0)||
+			// 	(i == 0 && j == (sizeOfBoard-1))||
+			// 	(i == (sizeOfBoard-1) && j == 0)||
+			// 	(i == (sizeOfBoard-1) && j == (sizeOfBoard-1))){
+			// 	board[i][j] = "" //1
+			// 	// board[i][j] = "monsterHere";
+			// 	}
 			else{
 				var randomNum = Math.random();
 				//balls:
@@ -193,12 +199,10 @@ function Start() {
 						// board[i][j] = 1;
 					}
 					// else{
-					// 	// board[i][j] = "empty";
+						// board[i][j] = "empty";
 					// 	board[i][j] = 0;
-
 					// }
 				}
-		
 				//extras:		
 				else if (randomNum <= (1.0 * (bonusCoockieRemain + surpriseRemain + cookieLifeRemain + ballsRemain)) / cnt) {
 				// 	let randomNum_0_to_9_sec = Math.floor(Math.random() * 10);
@@ -214,26 +218,25 @@ function Start() {
 						cookieLifeJ = j;
 						board[i][j] = "cookieLife";
 					}
-					// else if(randomNum_0_to_9_sec >= 1 && surpriseRemain > 0){
-					// 	surpriseRemain--;
-					// 	surpriseI = i;
-					// 	surpriseJ = j;
-					// 	board[i][j] = "surprise";
-					// }
+					else if(randomNum_0_to_9 >= 1 && surpriseRemain > 0){
+						surpriseRemain--;
+						surpriseI = i;
+						surpriseJ = j;
+						board[i][j] = "surprise";
+					}
 				}
 				//pacman:								
 				else if(randomNum < (1.0 * (bonusCoockieRemain + surpriseRemain + cookieLifeRemain + pacmanRemain + ballsRemain) / cnt)) {
 					shape.i = i;
 					shape.j = j;
-					// shape.faceSide = "Right";
-					// shape.open = true;
+					shape.direction = "Right";
 					pacmanRemain--;
 					board[i][j] = "pacman"; //pacman 2
 					// board[i][j] = 2;
 				}
 				else{
-						// board[i][j] = "empty";
-						board[i][j] = 0;
+						board[i][j] = "empty";
+						// board[i][j] = 0;
 					}
 				cnt--;
 			}
@@ -248,27 +251,39 @@ function Start() {
 	}
 	while (ballsRemain > 0) {
 		let emptyCellForBall = findRandomEmptyCell(board);
-		board[emptyCellForBall[0]][emptyCellForBall[1]] = "color25Ball";
-		ballsRemain--;
+		if(ball25Remain > 0){
+			board[emptyCellForBall[0]][emptyCellForBall[1]] = "color25Ball";
+			ball25Remain--;
+			ballsRemain--;
+		}
+		if(ball15Remain > 0){
+			board[emptyCellForBall[0]][emptyCellForBall[1]] = "color15Ball";
+			ball15Remain--;
+			ballsRemain--;
+		}
+		if(ball5Remain > 0){
+			board[emptyCellForBall[0]][emptyCellForBall[1]] = "color5Ball";
+			ball5Remain--;
+			ballsRemain--;
+		}
 	}
-	while (bonusCoockieRemain > 0){
+	while (surpriseRemain > 0){
+		let emptyCellForSurprise = findRandomEmptyCell(board);
+		board[emptyCellForSurprise[0]][emptyCellForSurprise[1]] = "surprise";
+		surpriseRemain--;
+	}
+	if (bonusCoockieRemain > 0){
 		let emptyCellForBonusCoockie = findRandomEmptyCell(board);
+		bonusCoockieI = emptyCellForSurprise[0];
+		bonusCoockieJ = emptyCellForSurprise[1];
 		board[emptyCellForBonusCoockie[0]][emptyCellForBonusCoockie[1]] = "bonusCoockie";
-		ballsRemain--;
+		bonusCoockieRemain--;
 	}
-	while (cookieLifeRemain > 0){
+	if (cookieLifeRemain > 0){
 		let emptyCellForCookieLife = findRandomEmptyCell(board);
 		board[emptyCellForCookieLife[0]][emptyCellForCookieLife[1]] = "cookieLife";
-		ballsRemain--;
+		cookieLifeRemain--;
 	}
-	// while (surpriseRemain > 0){
-	// 	let emptyCellForSurprise = findRandomEmptyCell(board);
-	// 	surpriseI = emptyCellForSurprise[0];
-	// 	surpriseJ = emptyCellForSurprise[1];
-	// 	board[surpriseI][surpriseJ] = "surprise";
-	// 	ballsRemain--;
-	// }
-
 	keysDown = {};
 	addEventListener(
 		"keydown",
@@ -284,13 +299,13 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 170);
+	interval = setInterval(UpdatePosition, 150);
 }
 
 function findRandomEmptyCell(board) {
 	var i = Math.floor(Math.random() * (sizeOfBoard-1) + 1);
 	var j = Math.floor(Math.random() * (sizeOfBoard-1) + 1);
-	while (board[i][j] != 0) {
+	while (board[i][j] != "empty") {
 		i = Math.floor(Math.random() * (sizeOfBoard-1) + 1);
 		j = Math.floor(Math.random() * (sizeOfBoard-1) + 1);
 	}
@@ -344,36 +359,18 @@ function Draw() {
 			else if ( board[i][j] === "cookieLife"){
 				DrawCoockieLife(center.x,center.y);
 			}
-			//older pacman:
-			// 	context.beginPath();
-			// 	context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
-			// 	context.lineTo(center.x, center.y);
-			// 	context.fillStyle = pacColor; //color
-			// 	context.fill();
-			// 	context.beginPath();
-			// 	context.arc(center.x, center.y, canvasCell/5 , 0, 2 * Math.PI); // circle
-			// 	context.fillStyle = pacColor; //color
-			// 	context.fill();
-			// 	context.beginPath();
-			// 	context.arc(center.x + 5, center.y - 15, canvasCell/5 , 0, 2 * Math.PI); // circle
-			// 	context.fillStyle = "black"; //color
-			// 	context.fill();
-			// } else if (board[i][j] == 1) {
-			// 	context.beginPath();
-			// 	context.arc(center.x, center.y, canvasCell/5 , 0, 2 * Math.PI); // circle
-			// 	context.fillStyle = "black"; //color
-			// 	context.fill();
-			
-			else if (board[i][j] == 4) {
+			else if ( board[i][j] === "surprise"){
+				DrawSurprise(center.x,center.y);
+			}
+			else if (board[i][j] == "wall") {
 				context.beginPath();
 				context.rect(center.x - canvasCellRadius, center.y - canvasCellRadius, canvasCell, canvasCell);
 				context.fillStyle = "grey"; //color
 				context.fill();
-			}
+			}	
 		}
 	}
 }
-
 
 //drawing balls:
 function Draw25Ball(centerX,centerY){
@@ -395,45 +392,87 @@ function Draw5Ball(centerX,centerY){
 	context.fill();
 }
 function DrawPacman(centerX,centerY){
-	// $("#CookieMan").show(); 
-	context.drawImage(pacmanImg, centerX-canvasCellRadius/1.5, centerY-canvasCellRadius/1.5, canvasCellRadius*1.5, canvasCellRadius*1.5);
+	if(shape.direction == "Right"){
+		context.drawImage(pacmanImg, centerX-canvasCellRadius/1.5, centerY-canvasCellRadius/1.5, canvasCellRadius*1.5, canvasCellRadius*1.5);
+	}
+	if(shape.direction == "Left"){
+		context.drawImage(pacmanLeftImg, centerX-canvasCellRadius/1.5, centerY-canvasCellRadius/1.5, canvasCellRadius*1.5, canvasCellRadius*1.5);
+	}
+	if(shape.direction == "Down"){
+		context.drawImage(pacmanDownImg, centerX-canvasCellRadius/1.5, centerY-canvasCellRadius/1.5, canvasCellRadius*1.5, canvasCellRadius*1.5);
+	}
+	else if(shape.direction == "Up"){
+		context.drawImage(pacmanUpImg, centerX-canvasCellRadius/1.5, centerY-canvasCellRadius/1.5, canvasCellRadius*1.5, canvasCellRadius*1.5);
+	}
 }
 function DrawBonusCoockie(centerX,centerY){
-	// $("#CookieMan").show(); 
 	context.drawImage(bonusCoockieImg, centerX-canvasCellRadius/1.5, centerY-canvasCellRadius/1.5, canvasCellRadius*1.5, canvasCellRadius*1.5);
 }
 function DrawCoockieLife(centerX,centerY){
-	// $("#CookieMan").show(); 
 	context.drawImage(cookieLifeImg, centerX-canvasCellRadius/1.5, centerY-canvasCellRadius/1.5, canvasCellRadius*1.5, canvasCellRadius*1.5);
 }
+function DrawSurprise(centerX,centerY){
+	context.drawImage(surpriseImg, centerX-canvasCellRadius/1.5, centerY-canvasCellRadius/1.5, canvasCellRadius*1.5, canvasCellRadius*1.5);
+}
+// function DrawMonster(centerX,centerY){
+// }
+
 
 
 function UpdatePosition() {
 	board[shape.i][shape.j] = 0;
 	var x = GetKeyPressed();
 	if (x === "up") {
-		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
+		shape.direction = "Up";
+		if (shape.j > 0 && board[shape.i][shape.j - 1] != "wall") {
 			shape.j--;
 		}
 	}
 	if (x === "down") {
-		if (shape.j < (sizeOfBoard-1) && board[shape.i][shape.j + 1] != 4) {
+		shape.direction = "Down";
+		if (shape.j < (sizeOfBoard-1) && board[shape.i][shape.j + 1] != "wall") {
 			shape.j++;
 		}
 	}
 	if (x === "left") {
-		if (shape.i > 0 && board[shape.i - 1][shape.j] != 4) {
+		shape.direction = "Left";
+		if (shape.i > 0 && board[shape.i - 1][shape.j] != "wall") {
 			shape.i--;
 		}
 	}
 	if (x === "right") {
-		if (shape.i < (sizeOfBoard-1) && board[shape.i + 1][shape.j] != 4) {
+		shape.direction = "Right";
+		if (shape.i < (sizeOfBoard-1) && board[shape.i + 1][shape.j] != "wall") {
 			shape.i++;
 		}
 	}
-	if (board[shape.i][shape.j] == 1) {
-		score++;
+	if (board[shape.i][shape.j] == "color5Ball" ) {
+		score += 5;
 	}
+	if (board[shape.i][shape.j] == "color15Ball" ) {
+		score += 15;
+	}
+	if (board[shape.i][shape.j] == "color25Ball" ) {
+		score += 25;
+	}
+	if (board[shape.i][shape.j] == "bonusCoockie" ) {
+		score += 50;
+	}
+	if (board[shape.i][shape.j] == "surprise") {
+		rand = Math.floor(Math.random() * 2);
+		if(rand==1){
+			score += 50;
+		}
+		else{
+			score -= 50;
+		}
+	}
+	if (board[shape.i][shape.j] == "cookieLife" ) {
+		lifeGameRemain++;
+		cookieLifeEaten = true;
+		updateLifeSetting();
+	}
+
 	board[shape.i][shape.j] = "pacman";
 	var currentTime = new Date();
 	timeElapsed = (currentTime - startTime) / 1000;
@@ -447,3 +486,11 @@ function UpdatePosition() {
 		Draw();
 	}
 }
+
+// function updateLifeSetting(){
+// 	let imgNumTemp = lifeGameRemain;
+// 	if (cookieLifeEaten){
+// 		let lifeToAdd = "life" + imgNumTemp;
+		
+// 	}
+// }
