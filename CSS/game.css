@@ -3,35 +3,69 @@
     width: 100%;
     height: 400px;
     justify-content: space-between;
-    margin: 1%;
+}
+
+#game_page input {
+    background-color: #93dfff;
+    border: 0;
+    width: 100px;
+    cursor: context-menu;
+    padding: 0px 0px;
+    margin: 0px 0px;
+    color: #036e9d;
+}
+
+#game_page input:focus {
+    outline: none;
+}
+
+#game_page h1 {
+    margin-block-start: 0;
+    margin-block-end: 0.1em;
+}
+
+#game_page h3 {
+    margin: 0 0;
+    padding-right: 0;
+    padding-left: 0;
+    padding-top: 5px;
+    padding-bottom: 1px;
+}
+
+#game_page label {
+    font-weight: bold;
+}
+
+.centerDiv {
+    display: flex;
+    justify-content: space-around;
+}
+
+#game_status,
+#game_setting {
+    width: 15%;
+    display: flex;
+    flex-direction: column;
 }
 
 #game_status {
-    width: 15%;
+    margin-left: 15px !important;
 }
 
-#lifesLeftDiv {
-    display: inline-flex;
-    width: 100%;
+#game_setting {
+    margin-right: 15px !important;
 }
 
-#lifesLeftDiv img {
-    width: 20%;
+#game_setting label,
+input {
+    font-size: medium;
 }
 
-/* #game {
-    position: relative;
-    width: 50%;
-    border: 1px;
-} */
 
-/* .canvas {
-    position: absolute;
-    width: 100%;
-    object-fit: contain;
-    width: 100%;
-    height: 100%;
-} */
+#game_status label,
+input {
+    font-size: large;
+}
 
 #game_setting {
     display: flex;
@@ -52,24 +86,21 @@
     justify-content: space-between;
 }
 
-#game_page h3,
-h4 {
-    margin: 0 0;
-    padding: 0 0;
+/* setting section */
+.gameSettingDisplay {
+    display: flex;
+    flex-direction: column;
 }
 
-#game_page input {
-    background-color: #93dfff;
-    border: 0;
-    width: 85px;
-    cursor: context-menu;
-    padding: 0px 0px;
-    margin: 0px 0px;
-    color: #036e9d;
+.generalSettingContainer,
+.ballColorContainer,
+.keysContainer {
+    display: inline-flex;
+    justify-content: space-between;
 }
 
-#game_page input:focus {
-    outline: none;
+.MonsterContainer {
+    display: inline-flex;
 }
 
 .MonsterContainer input {
@@ -78,12 +109,16 @@ h4 {
     display: none;
 }
 
-.MonsterContainer {
-    display: inline-flex;
+.generalSettingContainer input {
+    width: 92px !important;
+    text-align: left;
 }
 
-#game_page label {
-    font-weight: bold;
+.ballColorContainer input {
+    width: 50px !important;
+    height: 20px !important;
+    margin-bottom: 1px !important;
+    margin-right: 48px !important;
 }
 
 #game_status label,
@@ -91,18 +126,25 @@ input {
     font-size: large;
 }
 
-#game_setting label,
-input {
-    font-size: medium;
+/* status section */
+.statusItemDiv {
+    display: flex;
+    flex-direction: column;
 }
 
-.generalSettingContainer input {
-    width: 50px !important;
-    text-align: center;
+#lifesLeftDiv {
+    display: inline-flex;
+    width: 100%;
 }
 
-.ballColorContainer input {
-    width: 50px !important;
-    height: 20px !important;
-    margin-bottom: 1px !important;
+#lifesLeftDiv img {
+    width: 10%;
+}
+
+#newGameDiv {
+    margin-top: 12px;
+}
+
+.Monster {
+    display: none;
 }

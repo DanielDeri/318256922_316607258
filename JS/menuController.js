@@ -1,39 +1,41 @@
 function showWelcome() {
     if (document.getElementById("welcome_page").style.display == "none") {
+        // Stop();
         $(signup_page).hide();
         $(login_page).hide();
         $(setting_page).hide();
         $(game_page).hide();
         $(welcome_page).show();
-        // stopGame();
+        Stop();
+
     }
 
 }
 
 function showSignup() {
     if (document.getElementById("signup_page").style.display == "none") {
+        // Stop();
         $(welcome_page).hide();
         $(login_page).hide();
         $(setting_page).hide();
         $(game_page).hide();
         signup_form.reset();
         $(signup_page).show();
-        // resetForms();
-        // stopGame();
+        Stop();
     }
 }
 function showLogin() {
     if (document.getElementById("login_page").style.display == "none") {
+        // Stop();
         $(welcome_page).hide();
         $(signup_page).hide();
         $(setting_page).hide();
         $(game_page).hide();
         login_form.reset();
         $(login_page).show();
-        // stopGame();
+        Stop();
     }
 }
-
 
 
 function showAbout() {

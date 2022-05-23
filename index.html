@@ -12,29 +12,31 @@
 </head>
 
 <body>
-	<img id="ElmoMonster" class="gameImg" src="./Media/Images/ElmoMonster.png">
-	<img id="BigBirdMonster" class="gameImg" src="./Media/Images/BigBirdMonster.png">
-	<img id="IrvineMonster" class="gameImg" src="./Media/Images/IrvineMonster.png">
-	<img id="GroverMonster" class="gameImg" src="./Media/Images/GroverMonster.png">
-	<img id="BonusCookie" class="gameImg" src="./Media/Images/BonusCookie.png">
-	<img id="BonusLife" class="gameImg" src="./Media/Images/BonusLife.png">
-	<img id="Surprise" class="gameImg" src="./Media/Images/Surprise.png">
-	<img id="CookieMan" class="gameImg" src="./Media/Images/CookieMan.png"> <!--right-->
+	<image id="ElmoMonster" class="gameImg" src="./Media/Images/ElmoMonster.png"></image>
+	<image id="BigBirdMonster" class="gameImg" src="./Media/Images/BigBirdMonster.png"></image>
+	<image id="IrvineMonster" class="gameImg" src="./Media/Images/IrvineMonster.png"></image>
+	<image id="GroverMonster" class="gameImg" src="./Media/Images/GroverMonster.png"></image>
+	<image id="BonusCookie" class="gameImg" src="./Media/Images/BonusCookie.png"></image>
+	<image id="BonusLife" class="gameImg" src="./Media/Images/BonusLife.png"></image>
+	<image id="Surprise" class="gameImg" src="./Media/Images/Surprise.png"></image>
+	<image id="CookieMan" class="gameImg" src="./Media/Images/CookieMan.png"></image>
+	<!--right-->
 	<img id="CookieManUp" class="gameImg" src="./Media/Images/CookieManUp.png">
 	<img id="CookieManDown" class="gameImg" src="./Media/Images/CookieManDown.png">
 	<img id="CookieManLeft" class="gameImg" src="./Media/Images/CookieManLeft.png">
-
-
-	<iframe width="0" height="0" src="https://www.youtube.com/embed/h_xe5UGpECU" title="YouTube video player"
+	<audio id="gameAudio">
+		<source src="./Media/Images/PositiveFuse.mp3" type="audio/mp3">
+	</audio>
+	<!-- <iframe id ="music" width="0" height="0" src="https://www.youtube.com/embed/h_xe5UGpECU?autoplay=1" title="YouTube video player"
 		frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-		allowfullscreen></iframe>
+		allowfullscreen></iframe> -->
 	<!--Header Section-->
+
 	<!---->
 	<header id="page-header">
 		<!--Add Logo-->
 		<img id="headerLogo" alt="header-logo" src="./Media/Images/HeaderLogo.png">
 	</header>
-
 	<!--Menu Section-->
 	<nav id="menu">
 		<a href="#" id="welcome" class="active mBtn" onclick="showWelcome()">Welcome</a>
@@ -96,7 +98,7 @@
 					<label for="showHideConfirm" id="showHideLabelTwo">Show Password</label>
 				</div>
 				<div class="SignButtons">
-					<button id="suSubmit" type="button" class="btn">Sign Up</button>
+					<button id="suSubmit" type="submit" class="btn">Sign Up</button>
 					<button id="suReset" type="reset" class="btn">Reset</button>
 				</div>
 			</form>
@@ -193,16 +195,18 @@
 		<div id="game_page" style="display: none;">
 			<!--Game Status Section - Left Side-->
 			<div id="game_status">
-				<h3>Game Status</h3>
-				<div id="username">
+				<div class="centerDiv">
+					<h1>Game Status</h1>
+				</div>
+				<div id="username" class="statusItemDiv">
 					<label for="lbUsername">USERNAME:</label>
 					<input id="lbUsername" type="text" readonly="readonly">
 				</div>
-				<div id="highScore">
+				<div id="highScore" class="statusItemDiv">
 					<label for="lbHighScore">HIGH SCORE:</label>
 					<input id="lbHighScore" type="text" readonly="readonly">
 				</div>
-				<div id="score">
+				<div id="score" class="statusItemDiv">
 					<label for="lblScore">SCORE:</label>
 					<input id="lblScore" type="text" readonly="readonly">
 				</div>
@@ -217,11 +221,13 @@
 						<img id="life6" src="./Media/Images/BonusLife.png" style="display: none;">
 					</div>
 				</div>
-				<div id="time">
+				<div id="time" class="statusItemDiv">
 					<label for="lblTime">TIME:</label>
 					<input id="lblTime" type="text" readonly="readonly">
 				</div>
-				<button id="newGameButton" class="btn">New Game</button>
+				<div id="newGameDiv" class="centerDiv">
+					<button id="newGameButton" class="btn">New Game</button>
+				</div>
 			</div>
 			<!--Game Section - Center-->
 			<div id="game">
@@ -229,8 +235,10 @@
 			</div>
 			<!--Game Setting Section - Right Side-->
 			<div id="game_setting">
-				<h3>Game Setting</h3>
-				<h4>General Game Setting:</h4>
+				<div class="centerDiv">
+					<h1>Game Setting</h1>
+				</div>
+				<h3>General Game Setting:</h3>
 				<div class="gameSettingDisplay">
 					<div class="generalSettingContainer">
 						<label for="timeSet">Game Time:</label>
@@ -241,7 +249,7 @@
 						<input id="Balls" type="text" readonly="readonly">
 					</div>
 				</div>
-				<h4>Your Pursuers:</h4>
+				<h3>Your Pursuers:</h3>
 				<div class="MonsterContainer">
 					<input type="image" id="monster1" class="Monster" readonly="readonly">
 					<input type="image" id="monster2" class="Monster" readonly="readonly">
@@ -249,7 +257,7 @@
 					<input type="image" id="monster4" class="Monster" readonly="readonly">
 				</div>
 
-				<h4>Game Balls Color:</h4>
+				<h3>Game Balls Color:</h3>
 				<div class="gameSettingDisplay">
 					<div class="ballColorContainer">
 						<label for="5BallColor">5 Points Ball:</label>
@@ -265,7 +273,7 @@
 					</div>
 				</div>
 
-				<h4>Game Movement Keys:</h4>
+				<h3>Game Movement Keys:</h3>
 				<div class="gameSettingDisplay">
 					<div class="keysContainer">
 						<label for="UPKeySet">UP key:</label>
@@ -313,6 +321,11 @@
 				</div>
 				<div class="modal-ans">
 					<p>
+						Uses: We used input picker In the sign up and setting page.
+						In addition we used console log in order to deabug our code when we had a bug we could not
+						understad.
+						We used RegEx and jQuery to validate our signUp inputs.
+						<br><br>
 						Our main struggles: Designing the site took us a lot of time.
 						Understanding the right flow to manage the different content sections, Implementing the logic,
 						and making it work. We also had a problem with the game board, timing, and scaling of the
@@ -332,10 +345,9 @@
 		</p>
 	</footer>
 </body>
-
 <script type="text/javascript" src="./JS/welcome.js"></script>
 <script type="text/javascript" src="./JS/signUp.js"></script>
-<script type="text/javascript" src="./JS/login.js"></script>
+<script type="text/javascript" src="./JS/logIn.js"></script>
 <script type="text/javascript" src="./JS/settings.js"></script>
 <script type="text/javascript" src="./JS/menuController.js"></script>
 

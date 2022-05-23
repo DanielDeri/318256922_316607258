@@ -50,7 +50,8 @@ function signUpToLogIn() {
 
     alert("Welcome to the Cookie-Man game. please Login to your new account");
     // add to list
-
+    $("#lbPasswordInput").attr("type", "password");
+    $("#lbPasswordConInput").attr("type", "password");
     $("#signup_page").hide();
     $("#login_page").show();
 }

@@ -7,13 +7,6 @@ var emailList = [""];
 // game_page.style.display = 'none';
 
 $(document).ready(function () {
-    // hide all pages besides welcome 
-    // $("#signup_page").hide();
-    // $("#login_page").hide();
-    // $("#setting_page").hide();
-    // $("#game_page").hide();
-
-
     // triggers in welcome page:
     $("#WSignUpButton").click(welcomeToSignUp);
     $("#WLogInButton").click(welcomeToLogIn);
@@ -37,4 +30,13 @@ $(document).ready(function () {
     $("#DOWNKey").keydown(function (event) { setDOWNKey(this, event); });
     $("#RIGHTKey").keydown(function (event) { setRIGHTKey(this, event); });
     $("#LEFTKey").keydown(function (event) { setLEFTKey(this, event); });
+
+    // triggers in Game page
+    $('#newGameButton').click(gameToSettings);
 });
+
+// function gameToSettings() {
+//     $(game_page).hide();
+//     resetSettings();
+//     $(setting_page).hide();
+// }
